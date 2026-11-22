@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" id="themeMeta" content="#09090b">
+  <title>PhotoTo · 传到电脑</title>
+  <link rel="icon" href="/static/icon.svg">
+  <link rel="stylesheet" href="/static/base.css">
+  <link rel="stylesheet" href="/static/phone.css">
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <div class="brand">
+        <img src="/static/icon.svg" alt="" width="28" height="28">
+        <span>PhotoTo</span>
+      </div>
+      <div class="top-right">
+        <button type="button" class="pin-pill hidden" id="userPinBtn" title="点击输入或切换 PIN 码">
+          <svg class="icon"><use href="/static/icons.svg#key"/></svg>
+          <span id="userPinText">PIN 码</span>
+        </button>
+        <div class="conn" id="conn"><i></i><span>已连接电脑</span></div>
+        <button class="btn btn-icon theme-btn" id="themeBtn" title="切换深色/浅色模式">
+          <svg class="icon icon-sun"><use href="/static/icons.svg#sun"/></svg>
+          <svg class="icon icon-moon"><use href="/static/icons.svg#moon"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h1>传到电脑</h1>
+      <p>自动分类 · 无损直传</p>
+    </section>
+
+    <input type="file" id="pickAny" accept="*/*" multiple hidden>
+    <section class="upload-card">
+      <button class="action-single" id="uploadBtn" type="button">
+        <span class="action-icon"><svg class="icon"><use href="/static/icons.svg#upload"/></svg></span>
+        <span class="action-text">
+          <b>选择照片 / 拍照 / 文件</b>
+          <small>支持多选，自动分类保存</small>
+        </span>
+      </button>
+      <label class="keep-row">
+        <span class="keep-info">
+          <b>保留原文件名</b>
+          <small id="keepHint">关闭时，照片按时间自动命名</small>
+        </span>
+        <input type="checkbox" id="keepName" class="switch">
+      </label>
+    </section>
+
+    <section class="text-box">
+      <div class="text-head">
+        <span><svg class="icon"><use href="/static/icons.svg#text"/></svg><b>发送文字 / 链接</b></span>
+        <button class="btn btn-ghost btn-sm hidden" id="clearText" type="button">清空</button>
+      </div>
+      <textarea id="textInput" rows="3" placeholder="输入文字或链接，一键发送到电脑…"></textarea>
+      <div class="text-foot">
+        <span class="muted" id="textCount">0 字</span>
+        <button class="btn btn-primary" id="sendText" type="button">
+          <svg class="icon"><use href="/static/icons.svg#send"/></svg>发送文字
+        </button>
+      </div>
+    </section>
+
+    <section class="queue-wrap">
+      <div class="queue-head">
+        <div>
+          <b>传输记录</b>
+          <span class="muted" id="summary">本次 0 项</span>
+        </div>
+        <button class="btn btn-ghost btn-sm hidden" id="clearDone">清空记录</button>
+      </div>
+      <div class="overall hidden" id="overall"><div class="overall-bar"><i id="overallBar"></i></div><span id="overallText"></span></div>
+      <ul class="queue" id="queue"></ul>
+      <div class="empty" id="empty">
+        <svg class="icon"><use href="/static/icons.svg#upload"/></svg>
+        <p>暂无记录（保留最近 30 条）</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- 用户侧 PIN 码验证弹窗 -->
+  <dialog class="modal user-pin-modal" id="userPinDlg">
+    <div class="modal-body">
+      <h3 class="up-title"><svg class="icon"><use href="/static/icons.svg#key"/></svg>输入访问 PIN 码</h3>
+      <p id="userPinHint">已开启 PIN 保护，请输入 PIN 码继续。</p>
+      <input type="text" class="input up-input" id="userPinInput" maxlength="32" placeholder="请输入 PIN 码" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="modal-actions">
+      <button type="button" class="btn" id="userPinCancel">稍后</button>
+      <button type="button" class="btn btn-primary" id="userPinSubmit">验证并连接</button>
+    </div>
+  </dialog>
+
+  <div class="toasts" id="toasts"></div>
+  <script src="/static/phone.js"></script>
+</body>
+</html>
