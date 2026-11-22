@@ -88,6 +88,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Extract static libpython in manylinux
+        run: |
+          cd /opt/_internal
+          tar xf static-libs-for-embedding-only.tar.xz
+
       - name: Install build dependencies (Python 3.12 in manylinux_2_28)
         run: |
           /opt/python/cp312-cp312/bin/python -m pip install --upgrade pip
